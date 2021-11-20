@@ -16,7 +16,7 @@ const PageContainer = styled.div`
 
 function App() {
   const { status, connect, account } = useConnect();
-  
+
   return (
     <PageContainer>
       <Header status={status} account={account} connect={connect} />

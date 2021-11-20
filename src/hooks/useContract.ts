@@ -15,9 +15,9 @@ export default function useContract<T extends Contract = Contract>(
     }
 
     try {
-        const { ethereum } = window;
-        const provider = new ethers.providers.Web3Provider(ethereum);
-        const signer = provider.getSigner();
+      const { ethereum } = window;
+      const provider = new ethers.providers.Web3Provider(ethereum);
+      const signer = provider.getSigner();
       return new Contract(address, ABI, signer);
     } catch (error) {
       console.error("Failed To Get Contract", error);
