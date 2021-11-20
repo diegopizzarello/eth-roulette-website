@@ -1,3 +1,5 @@
+// TODO: Check if user is in the right network.
+
 import { useState, useEffect } from 'react';
 
 declare let window: any;
