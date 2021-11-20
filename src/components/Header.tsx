@@ -1,5 +1,8 @@
 import React from "react";
 import MetaMaskOnboarding from '@metamask/onboarding'
+import styled from "styled-components";
+import { Button, Typography, Avatar, Image } from "antd";
+
 import { Status } from "../hooks/useConnect";
 
 interface HeaderProps {
@@ -7,6 +10,22 @@ interface HeaderProps {
   account?: string;
   connect: () => void;
 }
+
+const Container = styled.div`
+  display: flex;
+  height: 80px;
+  padding: 24px 48px;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+  margin-bottom: 48px;
+`;
+
+const AccountContainer = styled.div`
+  display: flex;
+`;
+
+const { Text } = Typography;
 
 const Header = ({ status, account, connect }: HeaderProps) => {
 
@@ -16,12 +35,28 @@ const Header = ({ status, account, connect }: HeaderProps) => {
     onboarding.startOnboarding();
   }
 
+  const AccountInfo = () => (
+    <AccountContainer>
+      <Avatar
+        size={48}
+        style={{ backgroundColor: 'white', marginRight: 8 }}
+        src={
+          <Image
+            src={`https://avatars.dicebear.com/api/open-peeps/${account}.svg`}
+            style={{ width: 48 }}
+          />}
+      />
+      <Text style={{ color: 'white', maxWidth: 120 }} strong ellipsis>{account}</Text>
+    </AccountContainer>
+  )
+
   return (
-    <div>
-      {status === 'not_installed' && <button onClick={onClickInstall}>install</button>}
-      {status === 'installed' && <button onClick={connect}>connect</button>}
-      {status === 'connected' && <span>{`connected ${account}`}</span>}
-    </div>
+    <Container>
+      <span>Logo</span>
+      {status === 'not_installed' && <Button type="primary" shape="round" onClick={onClickInstall}>Install Metamask</Button>}
+      {status === 'installed' && <Button type="primary" size="large" shape="round" onClick={connect}>Connect Metamask</Button>}
+      {status === 'connected' && <AccountInfo />}
+    </Container>
   )
 
 }

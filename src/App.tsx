@@ -9,9 +9,10 @@ import Game from './screens/Game';
 const PageContainer = styled.div`
   background-color: #030303;
   height: 100vh;
-  justify-content: center;
   color: white;
   display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 function App() {

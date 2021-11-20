@@ -2,6 +2,7 @@ import React from "react";
 import useContract from "../hooks/useContract";
 import abi from '../contracts/WaveRoulette.json';
 import { WaveRoulette } from "../contracts/types";
+import Roulette from "../components/Roulette";
 
 const contractAddress = "0x37215DC06FE3A9fd3095D1BbA490b3A49e525387";
 
@@ -18,8 +19,7 @@ const Game = () => {
 
   return (
     <div>
-      GAME SCREEN
-      <button onClick={totalWaves}>waves</button>
+      <Roulette players={[]} winner={0} onPrizeDefined={() => {}} start={false} />
     </div>
   )
 }
