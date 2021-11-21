@@ -32,7 +32,7 @@ interface RouletteProps {
 }
 
 const Roulette = ({ players, winner, start, onPrizeDefined }: RouletteProps) => {
-  
+
   const memoizedPrizes = useMemo(() => {
     const formatPlayers = players.map(player => ({
       id: player.waver,
@@ -41,11 +41,12 @@ const Roulette = ({ players, winner, start, onPrizeDefined }: RouletteProps) => 
     }));
     return formatPrizes(formatPlayers)
   }, [players]);
-  
-  console.log('formatPlayers ', memoizedPrizes);
+
+  const indexWinner = players.length * 7 + winner;
+
   return (
     <div style={{ maxWidth: 600 }}>
-      <RoulettePro style={{ width: 300 }} prizes={memoizedPrizes} prizeIndex={winner} start={start} onPrizeDefined={onPrizeDefined} debug/>
+      <RoulettePro style={{ width: 300 }} prizes={memoizedPrizes} prizeIndex={indexWinner} start={start} onPrizeDefined={onPrizeDefined} debug />
     </div>
   )
 };
