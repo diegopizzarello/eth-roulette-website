@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { BackTop } from 'antd';
 
 import Header from './components/Header';
 import useConnect from './hooks/useConnect';
@@ -8,7 +9,7 @@ import Game from './screens/Game';
 
 const PageContainer = styled.div`
   background-color: #030303;
-  height: 100vh;
+  min-height: 100vh;
   color: white;
   display: flex;
   flex-direction: column;
@@ -20,6 +21,7 @@ function App() {
 
   return (
     <PageContainer>
+      <BackTop />
       <Header status={status} account={account} connect={connect} />
       {status === 'connected' ? (
         <Game />
