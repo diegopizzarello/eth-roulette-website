@@ -57,11 +57,11 @@ const Header = ({ status, account, connect }: HeaderProps) => {
 
   return (
     <Container>
-      <Badge status="processing" text="Rinkeby Network" style={{ color: 'white', width: 180}}/>
-      <Title level={3} style={{ color: '#F49309', letterSpacing: 2.2 }}>ROULETTE</Title>
+      <Badge status="processing" text="Rinkeby Network" style={{ color: 'white', width: 180 }} />
+      <Title level={3} style={{ color: '#F49309', letterSpacing: 2.2, marginBottom: 0 }}>ROULETTE</Title>
       {status === 'not_installed' && <Button type="primary" shape="round" onClick={onClickInstall}>Install Metamask</Button>}
       {status === 'installed' && <Button type="primary" size="large" shape="round" onClick={connect}>Connect Metamask</Button>}
-      {(status === 'connected' && account) && <AccountInfo address={account} />}
+      {((status === 'connected' || status==='wrong_network') && account) && <AccountInfo address={account} />}
     </Container>
   )
 

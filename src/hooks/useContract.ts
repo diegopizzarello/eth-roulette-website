@@ -21,7 +21,6 @@ export default function useContract<T extends Contract = Contract>(
       return new Contract(address, ABI, signer);
     } catch (error) {
       console.error("Failed To Get Contract", error);
-
       return null;
     }
   }, [address, ABI]) as T;

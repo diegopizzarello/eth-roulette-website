@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 
 declare let window: any;
-export type Status = 'not_installed' | 'installed' | 'connected';
+export type Status = 'not_installed' | 'installed' | 'connected' | 'wrong_network';
 
 const useConnect = () => {
   const [status, setStatus] = useState<Status>('not_installed');
@@ -25,7 +25,21 @@ const useConnect = () => {
         const account = accounts[0];
         setAccount(account);
       }
-      setStatus(isConnected ? 'connected' : 'installed');
+
+      const chainId = await ethereum.request({ method: 'eth_chainId' });
+      const status = chainId !== '0x4' ? 'wrong_network' : isConnected ? 'connected' : 'installed';
+      setStatus(status);
+      if (status === 'wrong_network') {
+        try {
+          await ethereum.request({
+            method: "wallet_switchEthereumChain",
+            params: [{ chainId: "0x4" }]
+          });
+        } catch (e) {
+          console.log('error switching network ', e);
+          window.location.reload();
+        }
+      }
     } catch (error) {
       console.log(error);
     }
@@ -46,7 +60,13 @@ const useConnect = () => {
       setStatus('not_installed');
       return;
     }
+    const { ethereum } = window;
+    ethereum.on('chainChanged', (_chainId: number) => window.location.reload());
     checkIfWalletIsConnected();
+
+    return () => {
+      ethereum.removeListener('chainChanged', (_chainId: number) => window.location.reload());
+    }
   }, []);
 
   return { status, connect, account };
