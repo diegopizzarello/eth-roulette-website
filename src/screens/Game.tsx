@@ -10,7 +10,7 @@ import Roulette from "../components/Roulette";
 import { WaveStructOutput } from "../contracts/types/WaveRoulette";
 import { BigNumber } from "ethers";
 
-const contractAddress = "0x37215DC06FE3A9fd3095D1BbA490b3A49e525387";
+const contractAddress = "0x929A5455Fb76F5B7456fa0ec6351D438f28226Ed";
 
 const contractABI = abi.abi;
 
