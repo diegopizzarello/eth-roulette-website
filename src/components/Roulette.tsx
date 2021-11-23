@@ -46,7 +46,13 @@ const Roulette = ({ players, winner, start, onPrizeDefined }: RouletteProps) => 
 
   return (
     <div style={{ maxWidth: 600 }}>
-      <RoulettePro style={{ width: 300 }} prizes={memoizedPrizes} prizeIndex={indexWinner} start={start} onPrizeDefined={onPrizeDefined} debug />
+      <RoulettePro
+        style={{ width: 300 }}
+        prizes={memoizedPrizes}
+        prizeIndex={indexWinner}
+        start={start}
+        onPrizeDefined={onPrizeDefined}
+      />
     </div>
   )
 };

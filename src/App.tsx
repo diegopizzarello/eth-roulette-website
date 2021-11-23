@@ -4,7 +4,7 @@ import { BackTop } from 'antd';
 
 import Header from './components/Header';
 import useConnect from './hooks/useConnect';
-import ConnectWallet from './screens/ConnectWallet';
+import InfoScreen from './screens/InfoScreen';
 import Game from './screens/Game';
 
 const PageContainer = styled.div`
@@ -26,7 +26,7 @@ function App() {
       {status === 'connected' ? (
         <Game />
       ) : (
-        <ConnectWallet />
+        <InfoScreen status={status}/>
       )}
     </PageContainer>
   );
