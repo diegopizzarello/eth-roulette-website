@@ -37,7 +37,10 @@ const useConnect = () => {
           });
         } catch (e) {
           console.log('error switching network ', e);
-          window.location.reload();
+          //@ts-ignore
+          if (e.code !== -32002) {
+            window.location.reload();
+          }
         }
       }
     } catch (error) {
