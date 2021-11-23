@@ -10,7 +10,7 @@ import Roulette from "../components/Roulette";
 import { WaveStructOutput } from "../contracts/types/WaveRoulette";
 import { BigNumber } from "ethers";
 
-const contractAddress = "0x929A5455Fb76F5B7456fa0ec6351D438f28226Ed";
+const contractAddress = "0xC2F6d05f24D99e3Def636E317Ee58D35dec4A5eF";
 
 const contractABI = abi.abi;
 
@@ -94,18 +94,26 @@ const Game = () => {
       newWave,
       ...prevState,
     ]);
-    if (!rouletteResult?.players.find(player => player.waver === from && player.message === message)) {
-      setPlayers(prevState => [
-        ...prevState,
-        newWave,
-      ]);
-    }
+    setPlayers(prevState => [
+      newWave,
+      ...prevState,
+    ]);
   };
 
-  const onNewWinner = (from: string, _timestamp: BigNumber, message: string, players: WaveStructOutput[]) => {
-    const winner = players.findIndex(player => player.waver === from && player.message === message);
-    setRouletteResult({ winner, players });
+  const onNewWinner = (
+    from: string,
+    _timestamp: BigNumber,
+    message: string,
+    roulettePlayers: WaveStructOutput[],
+    lastWave: WaveStructOutput
+  ) => {
+    const winner = roulettePlayers.findIndex(player => player.waver === from && player.message === message);
+    setRouletteResult({ winner, players: roulettePlayers });
     setPlayers([]);
+    setWaves(prevState => [
+      lastWave,
+      ...prevState,
+    ]);
   };
 
   const loadPlayers = async () => {
@@ -132,6 +140,7 @@ const Game = () => {
       setIsLoading(false);
     } catch (e) {
       console.log('error joining ', e);
+      setIsLoading(false);
       messageStatus.error('Please try again');
     }
   }

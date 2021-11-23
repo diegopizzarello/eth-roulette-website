@@ -79,7 +79,7 @@ export interface WaveRouletteInterface extends utils.Interface {
 
   events: {
     "NewWave(address,uint256,string)": EventFragment;
-    "NewWinner(address,uint256,string,tuple[])": EventFragment;
+    "NewWinner(address,uint256,string,tuple[],tuple)": EventFragment;
   };
 
   getEvent(nameOrSignatureOrTopic: "NewWave"): EventFragment;
@@ -94,12 +94,13 @@ export type NewWaveEvent = TypedEvent<
 export type NewWaveEventFilter = TypedEventFilter<NewWaveEvent>;
 
 export type NewWinnerEvent = TypedEvent<
-  [string, BigNumber, string, WaveStructOutput[]],
+  [string, BigNumber, string, WaveStructOutput[], WaveStructOutput],
   {
     from: string;
     timestamp: BigNumber;
     message: string;
     players: WaveStructOutput[];
+    lastWave: WaveStructOutput;
   }
 >;
 
@@ -189,17 +190,19 @@ export interface WaveRoulette extends BaseContract {
       message?: null
     ): NewWaveEventFilter;
 
-    "NewWinner(address,uint256,string,tuple[])"(
+    "NewWinner(address,uint256,string,tuple[],tuple)"(
       from?: string | null,
       timestamp?: null,
       message?: null,
-      players?: null
+      players?: null,
+      lastWave?: null
     ): NewWinnerEventFilter;
     NewWinner(
       from?: string | null,
       timestamp?: null,
       message?: null,
-      players?: null
+      players?: null,
+      lastWave?: null
     ): NewWinnerEventFilter;
   };
 
