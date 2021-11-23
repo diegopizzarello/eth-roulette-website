@@ -30,18 +30,20 @@ const useConnect = () => {
       const status = chainId !== '0x4' ? 'wrong_network' : isConnected ? 'connected' : 'installed';
       setStatus(status);
       if (status === 'wrong_network') {
-        try {
-          await ethereum.request({
-            method: "wallet_switchEthereumChain",
-            params: [{ chainId: "0x4" }]
-          });
-        } catch (e) {
-          console.log('error switching network ', e);
-          //@ts-ignore
-          if (e.code !== -32002) {
-            window.location.reload();
+        setTimeout(async () => {
+          try {
+            await ethereum.request({
+              method: "wallet_switchEthereumChain",
+              params: [{ chainId: "0x4" }]
+            });
+          } catch (e) {
+            console.log('error switching network ', e);
+            //@ts-ignore
+            if (e.code !== -32002) {
+              window.location.reload();
+            }
           }
-        }
+        }, 2000)
       }
     } catch (error) {
       console.log(error);
