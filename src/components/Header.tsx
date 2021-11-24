@@ -23,11 +23,23 @@ const Container = styled.div`
   width: 100%;
   align-items: center;
   margin-bottom: 48px;
+
+  @media (max-width: 768px) {
+    padding: 24px 12px;
+  }
 `;
 
 const AccountContainer = styled.div`
   display: flex;
   width: 180px;
+`;
+
+const BadgeNetwork = styled(Badge)`
+  width: 180px;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const { Text, Title } = Typography;
@@ -57,7 +69,7 @@ const Header = ({ status, account, connect }: HeaderProps) => {
 
   return (
     <Container>
-      <Badge status="processing" text="Rinkeby Network" style={{ color: 'white', width: 180 }} />
+      <BadgeNetwork status="processing" text="Rinkeby Network" style={{ color: 'white'}} />
       <Title level={3} style={{ color: '#F49309', letterSpacing: 2.2, marginBottom: 0 }}>ROULETTE</Title>
       {status === 'not_installed' && <Button type="primary" shape="round" onClick={onClickInstall}>Install Metamask</Button>}
       {status === 'installed' && <Button type="primary" size="large" shape="round" onClick={connect}>Connect Metamask</Button>}
