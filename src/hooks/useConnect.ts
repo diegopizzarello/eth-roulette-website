@@ -27,7 +27,7 @@ const useConnect = () => {
       }
 
       const chainId = await ethereum.request({ method: 'eth_chainId' });
-      const status = chainId !== '0x4' ? 'wrong_network' : isConnected ? 'connected' : 'installed';
+      const status = chainId !== '0x5' ? 'wrong_network' : isConnected ? 'connected' : 'installed';
       setStatus(status);
       if (status === 'wrong_network') {
         setTimeout(async () => {

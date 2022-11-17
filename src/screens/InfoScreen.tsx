@@ -2,7 +2,7 @@ import React from "react";
 import { Typography } from "antd";
 import styled from "styled-components";
 
-import metamask from '../assets/metamask.png';
+import metamask from "../assets/metamask.png";
 import { Status } from "../hooks/useConnect";
 
 const { Text } = Typography;
@@ -27,21 +27,23 @@ const Info = styled(Text)`
   padding: 0px 42px;
 `;
 
-const InfoScreen = ({status}: InfoScreenProps) => {
-
+const InfoScreen = ({ status }: InfoScreenProps) => {
   const text = () => {
-    switch(status) {
-      case 'installed': return 'Connect your wallet using Metamask'
-      case 'not_installed': return 'You have to install Metamask extension to use the website'
-      case 'wrong_network': return 'You are in the wrong network! You must be in the Rinkeby Test Network'
+    switch (status) {
+      case "installed":
+        return "Connect your wallet using Metamask";
+      case "not_installed":
+        return "You have to install Metamask extension to use the website";
+      case "wrong_network":
+        return "You are in the wrong network! You must be in the Goerli Test Network";
     }
-  }
+  };
   return (
     <Container>
       <img src={metamask} alt="Metamask" style={{ width: 120 }} />
       <Info strong>{text()}</Info>
     </Container>
-  )
+  );
 };
 
 export default InfoScreen;
